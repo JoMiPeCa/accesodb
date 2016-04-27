@@ -36,6 +36,8 @@ Class Usuario{
         
         $db= dbconnect();
         
+        $squery="SELECT nombre FROM usuario WHERE usuario=:usr and clave=:pwd";
+        
         if($this->nomusuario==$snomusuario && $this->clave==$sclave)
             return true;
         else

@@ -1,4 +1,4 @@
--
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
