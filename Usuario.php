@@ -31,12 +31,19 @@ Class Usuario{
     }
 
     public function Acceso(){
-        $snomusuario="admin";
-        $sclave=md5("holamundo");
-        
+        /*$snomusuario="admin";
+        $sclave=md5("holamundo");*/
+        /*Llamada a la funcion que crea la instancia del objeto PDO*/
         $db= dbconnect();
         
+        /*Declaracion de la sentencia SQL que se requiere ejecutar*/
         $squery="SELECT nombre FROM usuario WHERE usuario=:usr and clave=:pwd";
+        
+        /*Instancia del objeto que realizara el query*/
+        $queryseleccion=$db->prepare($squery);
+        
+        $queryseleccion->bindParam(":usr", $this->nomusuario);
+        $queryseleccion->bindParam(":pwd", $this->clave);
         
         if($this->nomusuario==$snomusuario && $this->clave==$sclave)
             return true;
