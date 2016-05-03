@@ -3,5 +3,5 @@
     window.location="login.php"; 
 </script>
 <?php
-return;
+
 } ?>
