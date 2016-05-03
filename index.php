@@ -26,6 +26,6 @@ require 'Usuario.php';
         <br>
         <br>
         <br>
-        <a href="logout.php">Log Out</a>
+        <a href="<?php require 'logout.php';?>">Salir</a>
     </body>
 </html>
