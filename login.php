@@ -39,6 +39,7 @@ and open the template in the editor.
                     type:'POST',
                     data:"usuario="+$("#usuario").val()+"&clave="+clave,
                     success:function(datos){
+                        alert("ALERTA")
                        if (datos=='true') 
                            $("#acceso").submit();
                        else

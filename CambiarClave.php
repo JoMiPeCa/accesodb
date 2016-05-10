@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require 'Usuario.php';
 ?>
@@ -18,41 +18,50 @@ and open the template in the editor.
     <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
     <body>
 
-        <?php require 'ValidaSesion.php';?>
+        <?php require 'ValidaSesion.php'; ?>
 
-<?php
+        <?php
+        $oUsr = unserialize($_SESSION['oUsr']);
 
-$oUsr=unserialize($_SESSION['oUsr']);
+        echo "Cambiar clave a: " . $oUsr->getNombre() . " " . $oUsr->getApellido();
+        ?>
+        <form id="cambioclave" >
+            <fieldset>
+                <legend>Personal information:</legend>
+                Clave Actual:<br>
+                <input type="text" name="claveactual" id="claveactual"><br>
+                Nueva Clave:<br>
+                <input type="text" name="clavenueva" id="clavenueva"><br>
+                <br>
+                Repetir Clave:<br>
+                <input type="text" name="repetirclave" id="repetirclave"><br>
+                <br>
+                <div id="mensaje"></div>
+                <input type="button" name="enviar" value ="Enviar" onclick="Cambiar()">
 
-echo "Cambiar clave a:".$oUsr->getNombre()." ".$oUsr->getApellido();
-?>
- <form id="cambioclave" >
-        <fieldset>
-        <legend>Personal information:</legend>
-        Clave Actual:<br>
-        <input type="text" name="claveactual" id="claveactual"><br>
-        Nueva Clave:<br>
-            <input type="text" name="clavenueva" id="clavenueva"><br>
-            <br>
-        Repetir Clave:<br>
-            <input type="text" name="repetirclave" id="repetirclave"><br>
-            <br>
-            <div id="mensaje"></div>
-            <input type="button" name="enviar" value ="Enviar" onclick="Cambiar()">
-            
-        </fieldset>
-</form>
-<script> 
-        function Cambiar(){
-            var clave;
-            var claveactual="<?=$oUsr->getClave();?>";
-            var dato=$("#claveactual").val();
-            clave=CryptoJS.MD5(dato).toString();
+            </fieldset>
+        </form>
+        <script>
+            function Cambiar() {
+                var clave;
+                var claveactual = "<?= $oUsr->getClave(); ?>";
+                var dato = $("#claveactual").val();
+                clave = CryptoJS.MD5(dato).toString();
 
-            if (claveactual!=clave) alert("Clave no corresponde");
-
-            if ($("#clavenueva").val()!=$("#repetirclave").val()) alert("Su nueva clave no coincide");
-        }
-    </script> 
-</body>
+                $.ajax({
+                    url: 'CambioClave.php',
+                    type: 'POST',
+                    data: "clave=" + $("#repetirclave").val(),
+                    success: function (datos) {
+                        alert("FUNCIONO?! :D");
+                    }
+                });
+                /*
+                 if (claveactual!=clave) alert("Clave no corresponde");
+                 
+                 if ($("#clavenueva").val()!=$("#repetirclave").val()) alert("Su nueva clave no coincide");
+                 */
+            }
+        </script> 
+    </body>
 </html>

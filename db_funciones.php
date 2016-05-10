@@ -7,6 +7,8 @@ function dbconnect(){
    $db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY,true);
    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
    return $db;    
+   
+   
 }
 
 ?>
